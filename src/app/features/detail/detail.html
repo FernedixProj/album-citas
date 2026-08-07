@@ -1,0 +1,48 @@
+@if (activity(); as act) {
+
+<h1>{{ act.actividad }}</h1>
+
+<img
+    [src]="act.fotoSubidaURL ?? act.fotoURL"
+    [alt]="act.actividad"
+    width="400">
+
+<p>
+
+<strong>Mes:</strong>
+
+{{ act.mes }}
+
+</p>
+
+<p>
+
+<strong>Frase:</strong>
+
+{{ act.frase }}
+
+</p>
+
+@if (act.fechaRealizacion) {
+
+<p>
+
+<strong>Fecha:</strong>
+
+{{ act.fechaRealizacion.toLocaleDateString('es-EC', {
+day:'2-digit',
+month:'long',
+year:'numeric'
+}) }}
+
+</p>
+
+}
+
+<button (click)="back()">
+
+Volver al álbum
+
+</button>
+
+}

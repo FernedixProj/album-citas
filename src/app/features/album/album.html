@@ -1,0 +1,29 @@
+<h1>Álbum</h1>
+
+@for (month of months(); track month.name) {
+
+<section>
+
+    <h2>{{ month.name }}</h2>
+
+    <div>
+
+        @for (activity of month.activities; track activity.id) {
+
+        <article (click)="openActivity(activity)">
+
+            <img [src]="activity.isRealizada && activity.fotoSubidaURL
+        ? activity.fotoSubidaURL
+        : activity.fotoURL" [alt]="activity.actividad" width="120">
+
+            <p>{{ activity.actividad }}</p>
+
+        </article>
+
+        }
+
+    </div>
+
+</section>
+
+}

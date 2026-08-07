@@ -1,0 +1,11 @@
+@if(notification.visible()){
+
+<div
+class="notification"
+[class]="notification.type()">
+
+{{ notification.message() }}
+
+</div>
+
+}
