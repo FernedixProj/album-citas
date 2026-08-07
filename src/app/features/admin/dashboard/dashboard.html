@@ -1,0 +1,61 @@
+<h1>Panel de Administración</h1>
+
+<button (click)="create()">
+    Nueva actividad
+</button>
+
+@for(month of months(); track month.name){
+
+<h2>{{ month.name }}</h2>
+
+<table border="1">
+
+<tr>
+
+<th>Actividad</th>
+
+<th>Editar</th>
+
+<th>Eliminar</th>
+
+</tr>
+
+@for(activity of month.activities; track activity.id){
+
+<tr>
+
+<td>
+
+{{ activity.actividad }}
+
+</td>
+
+<td>
+
+<button
+(click)="edit(activity.id)">
+
+Editar
+
+</button>
+
+</td>
+
+<td>
+
+<button
+(click)="delete(activity.id)">
+
+Eliminar
+
+</button>
+
+</td>
+
+</tr>
+
+}
+
+</table>
+
+}

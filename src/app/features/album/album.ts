@@ -29,24 +29,24 @@ export class Album implements OnInit {
 
   }
 
- openActivity(activity: Activity): void {
+  openActivity(activity: Activity): void {
 
-  if (!activity.isRealizada) {
+    if (!activity.isRealizada) {
 
-    this.notificationService.show(
-'🔒 Esta actividad aún no ha sido desbloqueada.',
-'warning'
-);
+      this.notificationService.show(
+        '🔒 Esta actividad aún no ha sido desbloqueada.',
+        'warning'
+      );
 
-    return;
+      return;
+
+    }
+
+    this.router.navigate([
+      '/detail',
+      activity.id
+    ]);
 
   }
-
-  this.router.navigate([
-    '/detail',
-    activity.id
-  ]);
-
-}
 
 }

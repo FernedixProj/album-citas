@@ -10,6 +10,7 @@ import {
 
 import { auth } from '../firebase/firebase';
 import { AuthRepository } from '../../data/repositories/auth.repository';
+import { AuthorizedUser } from '../../models/authorized-user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,17 +47,21 @@ export class AuthService {
 
   }
 
-  async isAuthorized(): Promise<boolean> {
+  async getAuthorizedUser(): Promise<AuthorizedUser | null> {
 
     const user = await this.currentUser();
 
     if (!user) {
-      return false;
+      return null;
     }
 
-    const authorizedUser = await this.repository.getAuthorizedUser(
-      user.uid
-    );
+    return this.repository.getAuthorizedUser(user.uid);
+
+  }
+
+  async isAuthorized(): Promise<boolean> {
+
+    const authorizedUser = await this.getAuthorizedUser();
 
     return authorizedUser?.active === true;
 

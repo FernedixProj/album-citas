@@ -1,0 +1,167 @@
+@if (isEdit()) {
+
+<h1>Editar actividad</h1>
+
+} @else {
+
+<h1>Nueva actividad</h1>
+
+}
+
+@if (isEdit()) {
+
+<label>ID</label>
+
+<input
+    [ngModel]="model().id"
+    readonly>
+
+<br><br>
+
+}
+
+<label>Actividad</label>
+
+<input
+    [ngModel]="model().actividad"
+    (ngModelChange)="update('actividad',$event)">
+
+<br><br>
+
+<label>Frase</label>
+
+<textarea
+    [ngModel]="model().frase"
+    (ngModelChange)="update('frase',$event)">
+</textarea>
+
+<br><br>
+
+<label>Mes</label>
+
+<select
+    [ngModel]="model().mes"
+    (ngModelChange)="changeMonth($event)">
+
+<option>Enero</option>
+<option>Febrero</option>
+<option>Marzo</option>
+<option>Abril</option>
+<option>Mayo</option>
+<option>Junio</option>
+<option>Julio</option>
+<option>Agosto</option>
+<option>Septiembre</option>
+<option>Octubre</option>
+<option>Noviembre</option>
+<option>Diciembre</option>
+
+</select>
+
+<br><br>
+
+<label>Foto del mes</label>
+
+<input
+    [ngModel]="model().fotoURL"
+    readonly>
+
+<br><br>
+
+@if (isEdit()) {
+
+<hr>
+
+<label>
+
+<input
+    type="checkbox"
+    [ngModel]="model().isRealizada"
+    (ngModelChange)="changeStatus($event)">
+
+Actividad realizada
+
+</label>
+
+<br><br>
+
+<label>Fecha de realización</label>
+
+<input
+    type="date"
+    [ngModel]="getDateValue()"
+    (ngModelChange)="changeDate($event)">
+
+<button
+    type="button"
+    (click)="clearDate()"
+    [disabled]="!model().fechaRealizacion">
+
+Limpiar fecha
+
+</button>
+
+<br><br>
+
+<label>Foto subida</label>
+
+<input
+    [ngModel]="model().fotoSubidaURL"
+    (ngModelChange)="update('fotoSubidaURL',$event)">
+
+<button
+    type="button"
+    (click)="clearPhoto()"
+    [disabled]="!model().fotoSubidaURL">
+
+Limpiar foto
+
+</button>
+
+<br><br>
+
+@if (!model().isRealizada) {
+
+<p>
+
+⚠️ Esta actividad está pendiente.
+Si la marcas como realizada podrás completar posteriormente la fecha y la fotografía.
+
+</p>
+
+} @else {
+
+<p>
+
+✅ Actividad marcada como realizada.
+
+</p>
+
+}
+
+}
+
+<hr>
+
+<button
+    (click)="save()">
+
+@if (isEdit()) {
+
+Actualizar actividad
+
+} @else {
+
+Guardar actividad
+
+}
+
+</button>
+
+<button
+    type="button"
+    (click)="cancel()">
+
+Cancelar
+
+</button>

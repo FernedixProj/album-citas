@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { authGuard } from './core/guards/auth.guard';
+import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
 
@@ -24,6 +25,38 @@ export const routes: Routes = [
         .then(c => c.Login)
   },
 
+  // ==========================
+  // ADMINISTRACIÓN
+  // ==========================
+
+  {
+    path: 'admin',
+    canActivate: [adminGuard],
+    loadComponent: () =>
+      import('./features/admin/dashboard/dashboard')
+        .then(c => c.Dashboard)
+  },
+
+  {
+    path: 'admin/new',
+    canActivate: [adminGuard],
+    loadComponent: () =>
+      import('./features/admin/activity-form/activity-form')
+        .then(c => c.ActivityForm)
+  },
+
+  {
+    path: 'admin/edit/:id',
+    canActivate: [adminGuard],
+    loadComponent: () =>
+      import('./features/admin/activity-form/activity-form')
+        .then(c => c.ActivityForm)
+  },
+
+  // ==========================
+  // QR
+  // ==========================
+
   {
     path: 'qr/:id',
     canActivate: [authGuard],
@@ -31,6 +64,10 @@ export const routes: Routes = [
       import('./features/qr/qr')
         .then(c => c.Qr)
   },
+
+  // ==========================
+  // DETALLE
+  // ==========================
 
   {
     path: 'detail/:id',

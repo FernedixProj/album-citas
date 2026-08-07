@@ -1,9 +1,11 @@
 export interface AuthorizedUser {
 
+  uid: string;
+
   email: string;
 
   active: boolean;
 
-  role: 'admin' | 'user';
+  role: 'admin' | 'viewer';
 
 }

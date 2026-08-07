@@ -1,0 +1,31 @@
+@if (confirmation.visible()) {
+
+<div class="backdrop">
+
+    <div class="dialog">
+
+        <h2>{{ confirmation.title() }}</h2>
+
+        <p>{{ confirmation.message() }}</p>
+
+        <div>
+
+            <button (click)="confirmation.cancel()">
+
+                Cancelar
+
+            </button>
+
+            <button (click)="confirmation.accept()">
+
+                Aceptar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+}
