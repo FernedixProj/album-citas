@@ -1,22 +1,149 @@
-<h1>Álbum</h1>
+<div class="album-header">
 
-@for (month of months(); track month.name) {
+    <div class="hero">
 
-<section>
+        <h1>
 
-    <h2>{{ month.name }}</h2>
+            Nuestro Álbum
 
-    <div>
+        </h1>
 
-        @for (activity of month.activities; track activity.id) {
+        <p>
 
-        <article (click)="openActivity(activity)">
+            Cada código QR es una nueva aventura.
+            Cada aventura se convierte en un recuerdo.
 
-            <img [src]="activity.isRealizada && activity.fotoSubidaURL
-        ? activity.fotoSubidaURL
-        : activity.fotoURL" [alt]="activity.actividad" width="120">
+        </p>
 
-            <p>{{ activity.actividad }}</p>
+    </div>
+
+    <div class="header-actions">
+
+        <button
+
+            class="scan-button"
+
+            (click)="openScanner()">
+
+            <span class="icon">
+
+                📷
+
+            </span>
+
+            <span>
+
+                Escanear QR
+
+            </span>
+
+        </button>
+
+        <div class="menu-container">
+
+            <button
+
+                class="menu-button"
+
+                (click)="toggleMenu()">
+
+                ⚙️
+
+            </button>
+
+            @if(showMenu()){
+
+            <div class="menu">
+
+                <button
+
+                    class="menu-item"
+
+                    (click)="logout()">
+
+                    🚪
+
+                    <span>
+
+                        Cerrar sesión
+
+                    </span>
+
+                </button>
+
+            </div>
+
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+@for(month of months(); track month.name){
+
+<div class="month">
+
+    <div class="month-header">
+
+        <div class="month-decoration"></div>
+
+        <h2>
+
+            {{ month.name }}
+
+        </h2>
+
+        <div class="month-decoration"></div>
+
+    </div>
+
+    <div class="album-grid">
+
+        @for(activity of month.activities; track activity.id){
+
+        <article
+
+            class="photo"
+
+            [class.locked]="!activity.isRealizada"
+
+            [class.completed]="activity.isRealizada"
+
+            (click)="openActivity(activity)">
+
+            <div class="photo-image">
+
+                <img
+
+                    [src]="activity.isRealizada && activity.fotoSubidaURL
+                        ? activity.fotoSubidaURL
+                        : activity.fotoURL"
+
+                    [alt]="activity.actividad">
+
+                @if(!activity.isRealizada){
+
+                <div class="photo-overlay">
+
+                    <div class="lock-container">
+
+                        <div class="lock-circle">
+
+                            🔒
+
+                        </div>
+
+                        <div class="shine"></div>
+
+                    </div>
+
+                </div>
+
+                }
+
+            </div>
 
         </article>
 
@@ -24,6 +151,74 @@
 
     </div>
 
-</section>
+</div>
+
+}
+
+@if(showScanner()){
+
+<div
+
+    class="scanner-backdrop"
+
+    (click)="closeScanner()">
+
+    <section
+
+        class="scanner-dialog"
+
+        (click)="$event.stopPropagation()">
+
+        <div class="dialog-decoration"></div>
+
+        <header>
+
+            <div class="scanner-icon">
+
+                📷
+
+            </div>
+
+            <h2>
+
+                Escanear código QR
+
+            </h2>
+
+            <p>
+
+                Acerca el código QR al centro del recuadro para descubrir un nuevo recuerdo.
+
+            </p>
+
+        </header>
+
+        <div class="scanner-content">
+
+            <app-qr-scanner
+
+                (scanned)="onQrScanned($event)">
+
+            </app-qr-scanner>
+
+        </div>
+
+        <footer>
+
+            <button
+
+                class="close-button"
+
+                (click)="closeScanner()">
+
+                Cancelar
+
+            </button>
+
+        </footer>
+
+    </section>
+
+</div>
 
 }

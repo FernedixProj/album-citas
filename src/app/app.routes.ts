@@ -5,17 +5,14 @@ import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
 
-  {
-    path: '',
-    redirectTo: 'album',
-    pathMatch: 'full'
-  },
+  // ==========================
+  // INICIO
+  // ==========================
 
   {
-    path: 'album',
-    loadComponent: () =>
-      import('./features/album/album')
-        .then(c => c.Album)
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
 
   {
@@ -23,6 +20,18 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/login/login')
         .then(c => c.Login)
+  },
+
+  // ==========================
+  // ÁLBUM
+  // ==========================
+
+  {
+    path: 'album',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/album/album')
+        .then(c => c.Album)
   },
 
   // ==========================
@@ -71,14 +80,19 @@ export const routes: Routes = [
 
   {
     path: 'detail/:id',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/detail/detail')
         .then(c => c.Detail)
   },
 
+  // ==========================
+  // NO ENCONTRADO
+  // ==========================
+
   {
     path: '**',
-    redirectTo: 'album'
+    redirectTo: 'login'
   }
 
 ];

@@ -1,0 +1,331 @@
+:host{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+    padding:32px;
+
+    background:
+    linear-gradient(
+        180deg,
+        #fffdfb,
+        #fff8f8
+    );
+
+}
+
+.qr-page{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.qr-card{
+
+    width:min(560px,100%);
+
+    background:white;
+
+    border:1px solid #ece7e2;
+
+    border-radius:22px;
+
+    padding:48px 42px;
+
+    text-align:center;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.08);
+
+    animation:fadeUp .35s ease;
+
+}
+
+.icon{
+
+    width:96px;
+
+    height:96px;
+
+    margin:0 auto 28px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    font-size:3rem;
+
+    background:#fff5f7;
+
+    border:1px solid #f2d9df;
+
+}
+
+.icon.success{
+
+    background:#fff4ef;
+
+}
+
+.icon.error{
+
+    background:#fff2f2;
+
+}
+
+.pulse{
+
+    animation:pulse 1.6s infinite;
+
+}
+
+h1{
+
+    margin-bottom:14px;
+
+    color:var(--color-primary);
+
+    font-size:2rem;
+
+    font-weight:700;
+
+}
+
+h2{
+
+    margin-bottom:18px;
+
+    color:#555;
+
+    font-size:1.35rem;
+
+    font-weight:600;
+
+}
+
+p{
+
+    margin-bottom:30px;
+
+    color:var(--text-light);
+
+    line-height:1.8;
+
+    font-size:1rem;
+
+}
+
+small{
+
+    display:block;
+
+    margin-top:14px;
+
+    color:var(--text-light);
+
+    font-size:.9rem;
+
+}
+
+.loader{
+
+    width:220px;
+
+    height:8px;
+
+    margin:28px auto 0;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:#f3efed;
+
+    position:relative;
+
+}
+
+.loader::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    width:35%;
+
+    border-radius:999px;
+
+    background:var(--color-primary);
+
+    animation:loading 1.2s infinite linear;
+
+}
+
+/*==============================
+        PROGRESS
+==============================*/
+
+.progress{
+
+    width:100%;
+
+    height:10px;
+
+    margin-top:20px;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:#f1ecea;
+
+}
+
+.progress-bar{
+
+    height:100%;
+
+    width:0;
+
+    border-radius:999px;
+
+    background:
+    linear-gradient(
+        90deg,
+        var(--color-primary),
+        var(--color-secondary)
+    );
+
+    transition:width .1s linear;
+
+}
+
+/*==============================
+        BUTTON
+==============================*/
+
+.back-button{
+
+    margin-top:28px;
+
+    padding:14px 30px;
+
+    border:none;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    background:var(--color-primary);
+
+    color:white;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+
+    box-shadow:
+        0 10px 24px rgba(217,134,154,.18);
+
+}
+
+.back-button:hover{
+
+    transform:translateY(-2px);
+
+    background:#c97288;
+
+    box-shadow:
+        0 18px 34px rgba(217,134,154,.25);
+
+}
+
+/*==============================
+      RESPONSIVE
+==============================*/
+
+@media(max-width:640px){
+
+    :host{
+
+        padding:20px;
+
+    }
+
+    .qr-card{
+
+        padding:34px 24px;
+
+    }
+
+    h1{
+
+        font-size:1.65rem;
+
+    }
+
+    h2{
+
+        font-size:1.15rem;
+
+    }
+
+}
+
+/*==============================
+      KEYFRAMES
+==============================*/
+
+@keyframes loading{
+
+    from{
+
+        transform:translateX(-140%);
+
+    }
+
+    to{
+
+        transform:translateX(360%);
+
+    }
+
+}
+
+@keyframes pulse{
+
+    0%,100%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+    }
+
+}

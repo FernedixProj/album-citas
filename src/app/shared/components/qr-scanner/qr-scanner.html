@@ -1,0 +1,44 @@
+@if(!hasPermission){
+
+<p>
+
+Se necesita permiso para acceder a la cámara.
+
+</p>
+
+}
+
+@if(cameras.length > 1){
+
+<select
+    [value]="currentCamera"
+    (change)="currentCamera = cameras[$any($event.target).selectedIndex]">
+
+    @for(camera of cameras; track camera.deviceId){
+
+        <option>
+
+            {{camera.label || 'Cámara'}}
+
+        </option>
+
+    }
+
+</select>
+
+<br><br>
+
+}
+
+
+<zxing-scanner
+
+    [device]="currentCamera"
+
+    (camerasFound)="onCamerasFound($event)"
+
+    (permissionResponse)="onPermissionResponse($event)"
+
+    (scanSuccess)="onScanSuccess($event)">
+
+</zxing-scanner>

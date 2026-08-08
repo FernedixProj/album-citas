@@ -1,0 +1,98 @@
+:root{
+
+/*==============================
+=            COLORS            =
+==============================*/
+
+--color-primary:#d9869a;
+--color-primary-light:#f7d9e0;
+
+--color-secondary:#8db8ca;
+
+--color-accent:#efd8a5;
+
+--color-success:#82c99d;
+
+--color-warning:#efc46e;
+
+--color-danger:#d97b7b;
+
+
+/*==============================
+=          BACKGROUND          =
+==============================*/
+
+--background:#fffdfb;
+
+--background-gradient:
+
+radial-gradient(circle at top left,#ffeaf1 0%,transparent 35%),
+
+radial-gradient(circle at bottom right,#e2f4fb 0%,transparent 40%),
+
+linear-gradient(180deg,#fffdfb,#fff7f9);
+
+--surface:#ffffff;
+
+--surface-soft:#fff9fa;
+
+
+/*==============================
+=             TEXT             =
+==============================*/
+
+--text:#4b4b4b;
+
+--text-light:#7d7d7d;
+
+--text-white:#ffffff;
+
+
+/*==============================
+=           BORDERS            =
+==============================*/
+
+--border:#f0dfe4;
+
+
+/*==============================
+=           SHADOWS            =
+==============================*/
+
+--shadow-sm:
+
+0 4px 12px rgba(0,0,0,.05);
+
+--shadow-md:
+
+0 15px 30px rgba(0,0,0,.08);
+
+--shadow-lg:
+
+0 30px 60px rgba(0,0,0,.12);
+
+
+/*==============================
+=            RADIUS            =
+==============================*/
+
+--radius-sm:12px;
+
+--radius-md:20px;
+
+--radius-lg:30px;
+
+--radius-round:999px;
+
+
+/*==============================
+=         TRANSITIONS          =
+==============================*/
+
+--fast:.20s;
+
+--normal:.35s;
+
+--slow:.55s;
+
+}

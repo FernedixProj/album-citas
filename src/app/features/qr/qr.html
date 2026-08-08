@@ -1,1 +1,215 @@
-<p>qr works!</p>
+<section class="qr-page">
+
+    <div class="qr-card">
+
+        @switch(state()) {
+
+        @case('loading') {
+
+        <div class="icon pulse">
+
+            ❤️
+
+        </div>
+
+        <h1>
+
+            Buscando tu actividad...
+
+        </h1>
+
+        <p>
+
+            Estamos verificando el código QR.
+
+        </p>
+
+        <div class="loader"></div>
+
+        }
+
+        @case('new') {
+
+        <div class="icon success">
+
+            ✨
+
+        </div>
+
+        <h1>
+
+            ¡Nueva actividad descubierta!
+
+        </h1>
+
+        <h2>
+
+            {{ activity()?.actividad }}
+
+        </h2>
+
+        <p>
+
+            Esta actividad acaba de desbloquearse.
+
+            Muy pronto podrás volver a este recuerdo
+            simplemente escaneando nuevamente el mismo QR.
+
+        </p>
+
+        <div class="progress">
+
+            <div
+
+                class="progress-bar"
+
+                [style.width.%]="progress()">
+
+            </div>
+
+        </div>
+
+        <small>
+
+            Abriendo recuerdo...
+
+        </small>
+
+        }
+
+        @case('pending') {
+
+        <div class="icon">
+
+            ❤️
+
+        </div>
+
+        <h1>
+
+            Qué bueno verte nuevamente
+
+        </h1>
+
+        <h2>
+
+            {{ activity()?.actividad }}
+
+        </h2>
+
+        <p>
+
+            Esta actividad ya fue desbloqueada.
+
+            Todavía no existen recuerdos disponibles,
+            pero puedes volver cuando quieras.
+
+        </p>
+
+        <div class="progress">
+
+            <div
+
+                class="progress-bar"
+
+                [style.width.%]="progress()">
+
+            </div>
+
+        </div>
+
+        <small>
+
+            Abriendo actividad...
+
+        </small>
+
+        }
+
+        @case('memory') {
+
+        <div class="icon">
+
+            📸
+
+        </div>
+
+        <h1>
+
+            Bienvenido de nuevo
+
+        </h1>
+
+        <h2>
+
+            {{ activity()?.actividad }}
+
+        </h2>
+
+        <p>
+
+            Este recuerdo ya tiene momentos
+            guardados.
+
+            Disfrútalo una vez más ❤️
+
+        </p>
+
+        <div class="progress">
+
+            <div
+
+                class="progress-bar"
+
+                [style.width.%]="progress()">
+
+            </div>
+
+        </div>
+
+        <small>
+
+            Abriendo recuerdo...
+
+        </small>
+
+        }
+
+        @case('invalid') {
+
+        <div class="icon error">
+
+            ❌
+
+        </div>
+
+        <h1>
+
+            Código QR inválido
+
+        </h1>
+
+        <p>
+
+            Este código no pertenece
+            a este álbum o ya no se encuentra disponible.
+
+        </p>
+
+        <button
+
+            class="back-button"
+
+            (click)="backToAlbum()">
+
+            Volver al álbum
+
+        </button>
+
+        }
+
+        }
+
+    </div>
+
+</section>

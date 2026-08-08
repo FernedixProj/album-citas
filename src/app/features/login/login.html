@@ -1,1 +1,65 @@
-<p>Login</p>
+<div class="login-card">
+
+    <div class="heart">
+
+        ❤️
+
+    </div>
+
+    <h1>
+
+        Nuestro Álbum
+
+    </h1>
+
+    <p>
+
+        Cada código QR abre un nuevo recuerdo.
+        Inicia sesión para descubrir cada momento especial.
+
+    </p>
+
+    <button
+
+        class="google-button"
+
+        (click)="login()"
+
+        [disabled]="loading()">
+
+        @if(loading()){
+
+            <span>
+
+                Verificando acceso...
+
+            </span>
+
+        }
+
+        @else{
+
+            <img
+
+                src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+
+                alt="Google">
+
+            <span>
+
+                Continuar con Google
+
+            </span>
+
+        }
+
+    </button>
+
+    <small>
+
+        Solo los usuarios autorizados pueden acceder
+        a este álbum.
+
+    </small>
+
+</div>
