@@ -1,0 +1,500 @@
+:host{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+    padding:40px 24px;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        180deg,
+        #fffdfb,
+        #fff8f8
+    );
+
+}
+
+/*==============================*
+*PÁGINA
+*==============================*/
+
+.detail-page{
+
+    position:relative;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+/*==============================*
+*CORAZONES FLOTANTES
+*==============================*/
+
+.floating-hearts{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+}
+
+.floating-hearts span{
+
+    position:absolute;
+
+    top:-60px;
+
+    font-size:1.4rem;
+
+    opacity:.85;
+
+    animation:fall 3.8s ease-out forwards;
+
+}
+
+.floating-hearts span:nth-child(1){left:8%;animation-delay:.1s;}
+.floating-hearts span:nth-child(2){left:20%;animation-delay:.3s;}
+.floating-hearts span:nth-child(3){left:35%;animation-delay:.5s;}
+.floating-hearts span:nth-child(4){left:48%;animation-delay:.2s;}
+.floating-hearts span:nth-child(5){left:60%;animation-delay:.4s;}
+.floating-hearts span:nth-child(6){left:73%;animation-delay:.6s;}
+.floating-hearts span:nth-child(7){left:86%;animation-delay:.25s;}
+.floating-hearts span:nth-child(8){left:94%;animation-delay:.45s;}
+
+/*==============================*
+*TARJETA
+*==============================*/
+
+.detail-card{
+
+    position:relative;
+
+    width:min(760px,100%);
+
+    padding:44px;
+
+    background:white;
+
+    border:1px solid #ece7e2;
+
+    border-radius:24px;
+
+    text-align:center;
+
+    box-shadow:
+
+        0 20px 45px rgba(0,0,0,.08);
+
+    animation:cardAppear .45s ease;
+
+}
+
+/*==============================*
+*ICONO
+*==============================*/
+
+.detail-icon{
+
+    width:92px;
+
+    height:92px;
+
+    margin:0 auto 22px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    font-size:3rem;
+
+    background:#fff5f7;
+
+    border:1px solid #f2d9df;
+
+}
+
+/*==============================*
+*TÍTULOS
+*==============================*/
+
+h1{
+
+    color:var(--color-primary);
+
+    font-size:2.3rem;
+
+    margin-bottom:14px;
+
+}
+
+.phrase{
+
+    max-width:600px;
+
+    margin:0 auto 36px;
+
+    color:var(--text-light);
+
+    font-size:1.08rem;
+
+    line-height:1.8;
+
+    font-style:italic;
+
+}
+
+/*==============================*
+*MARCO FOTO
+*==============================*/
+
+.photo-frame{
+
+    position:relative;
+
+    margin-bottom:36px;
+
+}
+
+.photo-decoration{
+
+    position:absolute;
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:white;
+
+    border:1px solid #ece7e2;
+
+    box-shadow:
+
+        0 6px 18px rgba(0,0,0,.08);
+
+    z-index:2;
+
+}
+
+.top-left{
+
+    top:-16px;
+
+    left:-16px;
+
+}
+
+.top-right{
+
+    top:-16px;
+
+    right:-16px;
+
+}
+
+.bottom-left{
+
+    bottom:-16px;
+
+    left:-16px;
+
+}
+
+.bottom-right{
+
+    bottom:-16px;
+
+    right:-16px;
+
+}
+
+.photo-container{
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    border:2px solid #f1e8e7;
+
+    background:#f5f5f5;
+
+}
+
+.photo-container img{
+
+    width:100%;
+
+    display:block;
+
+    max-height:520px;
+
+    object-fit:cover;
+
+    animation:imageReveal .7s ease;
+
+}
+
+/*==============================*
+*INFO
+*==============================*/
+
+.detail-info{
+
+    margin-bottom:32px;
+
+}
+
+.label{
+
+    display:block;
+
+    color:#9b9b9b;
+
+    margin-bottom:8px;
+
+}
+
+.value{
+
+    font-size:1.1rem;
+
+    font-weight:600;
+
+    color:#555;
+
+}
+
+/*==============================*
+*PENDIENTE
+*==============================*/
+
+.pending-box{
+
+    margin-bottom:34px;
+
+    padding:28px;
+
+    border-radius:18px;
+
+    border:1px solid #f2dfe4;
+
+    background:#fff9fa;
+
+}
+
+.pending-icon{
+
+    font-size:2rem;
+
+    margin-bottom:12px;
+
+}
+
+.pending-box h3{
+
+    color:var(--color-primary);
+
+    margin-bottom:12px;
+
+}
+
+.pending-box p{
+
+    color:var(--text-light);
+
+    line-height:1.7;
+
+}
+
+/*==============================*
+*DIVISOR
+*==============================*/
+
+.hearts-divider{
+
+    margin:18px 0 28px;
+
+    font-size:1.25rem;
+
+    opacity:.8;
+
+}
+
+/*==============================*
+*BOTÓN
+*==============================*/
+
+.back-button{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:14px 34px;
+
+    border-radius:999px;
+
+    background:var(--color-primary);
+
+    color:white;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+
+    box-shadow:
+
+        0 10px 24px rgba(217,134,154,.18);
+
+}
+
+.back-button:hover{
+
+    transform:translateY(-2px);
+
+    background:#c97288;
+
+    box-shadow:
+
+        0 18px 34px rgba(217,134,154,.24);
+
+}
+
+/*==============================*
+*RESPONSIVE
+*==============================*/
+
+@media(max-width:640px){
+
+    .detail-card{
+
+        padding:30px 22px;
+
+    }
+
+    h1{
+
+        font-size:1.8rem;
+
+    }
+
+    .detail-icon{
+
+        width:72px;
+
+        height:72px;
+
+        font-size:2.4rem;
+
+    }
+
+}
+
+/*==============================*
+*ANIMACIONES
+*==============================*/
+
+@keyframes cardAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(25px)
+            scale(.97);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+@keyframes imageReveal{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(1.08);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+@keyframes fall{
+
+    from{
+
+        transform:
+            translateY(-80px)
+            rotate(0deg);
+
+        opacity:0;
+
+    }
+
+    15%{
+
+        opacity:.9;
+
+    }
+
+    to{
+
+        transform:
+            translateY(105vh)
+            rotate(360deg);
+
+        opacity:0;
+
+    }
+
+}

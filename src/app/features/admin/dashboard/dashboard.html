@@ -1,61 +1,159 @@
-<h1>Panel de Administración</h1>
+<section class="dashboard">
 
-<button (click)="create()">
-    Nueva actividad
-</button>
+    <header class="dashboard-header">
 
-@for(month of months(); track month.name){
+        <div>
 
-<h2>{{ month.name }}</h2>
+            <h1>
 
-<table border="1">
+                Administración de actividades
 
-<tr>
+            </h1>
 
-<th>Actividad</th>
+            <p>
 
-<th>Editar</th>
+                Gestiona todas las actividades del álbum.
 
-<th>Eliminar</th>
+            </p>
 
-</tr>
+        </div>
 
-@for(activity of month.activities; track activity.id){
+        <button class="new-button" (click)="create()">
 
-<tr>
+            + Nueva actividad
 
-<td>
+        </button>
 
-{{ activity.actividad }}
+    </header>
 
-</td>
+    <section class="filters">
 
-<td>
+        <input type="text" placeholder="Buscar por actividad, frase o ID..." [value]="search()"
+            (input)="search.set($any($event.target).value)">
 
-<button
-(click)="edit(activity.id)">
+        <select [value]="selectedMonth()" (change)="selectedMonth.set($any($event.target).value)">
 
-Editar
+            @for(month of availableMonths(); track month){
 
-</button>
+            <option [value]="month">
 
-</td>
+                {{ month }}
 
-<td>
+            </option>
 
-<button
-(click)="delete(activity.id)">
+            }
 
-Eliminar
+        </select>
 
-</button>
+        <select [value]="selectedYear()" (change)="selectedYear.set($any($event.target).value)">
 
-</td>
+            @for(year of availableYears(); track year){
 
-</tr>
+            <option [value]="year">
 
-}
+                {{ year }}
 
-</table>
+            </option>
 
-}
+            }
+
+        </select>
+
+    </section>
+
+    <section class="activity-list">
+
+        @if(filteredActivities().length === 0){
+
+        <div class="empty">
+
+            No se encontraron actividades.
+
+        </div>
+
+        }
+
+        @else{
+
+        @for(activity of filteredActivities(); track activity.id){
+
+        <article class="activity-row">
+
+            <div class="activity-info">
+
+                <h3>
+
+                    {{ activity.actividad }}
+
+                    <span class="activity-phrase">
+
+                        — {{ activity.frase }}
+
+                    </span>
+
+
+                </h3>
+
+                <p class="meta">
+
+                    🆔 {{ activity.id }}
+
+                    &nbsp;|&nbsp;
+
+                    📅 {{ activity.mes }}
+
+                    &nbsp;|&nbsp;
+
+                    @if(activity.isRealizada){
+
+                    ✅ Realizada
+
+                    }@else{
+
+                    ⏳ Pendiente
+
+                    }
+
+                    &nbsp;|&nbsp;
+
+                    🗓️
+
+                    @if(activity.fechaRealizacion){
+
+                    {{ formatDate(activity.fechaRealizacion) }}
+
+                    }@else{
+
+                    —
+
+                    }
+
+                </p>
+
+            </div>
+
+            <div class="actions">
+
+                <button class="edit-button" (click)="edit(activity.id)" title="Editar">
+
+                    ✏️
+
+                </button>
+
+                <button class="delete-button" (click)="delete(activity.id)" title="Eliminar">
+
+                    🗑️
+
+                </button>
+
+            </div>
+
+        </article>
+
+        }
+
+        }
+
+    </section>
+
+</section>

@@ -1,19 +1,160 @@
 :host{
 
-display:block;
+    display:block;
 
 }
 
+/*==============================*
+* MENSAJE
+*==============================*/
+
+p{
+
+    margin-bottom:16px;
+
+    color:#666;
+
+    text-align:center;
+
+    line-height:1.6;
+
+}
+
+/*==============================*
+* SELECT
+*==============================*/
+
+select{
+
+    width:100%;
+
+    padding:12px 14px;
+
+    border-radius:12px;
+
+    border:1px solid #e6e2df;
+
+    background:white;
+
+    font-size:.95rem;
+
+    margin-bottom:18px;
+
+    cursor:pointer;
+
+}
+
+select:focus{
+
+    outline:none;
+
+    border-color:var(--color-primary);
+
+    box-shadow:
+        0 0 0 4px rgba(217,134,154,.12);
+
+}
+
+/*==============================*
+* SCANNER
+*==============================*/
+
 zxing-scanner{
 
-display:block;
+    display:block;
 
-width:100%;
+    width:100%;
 
-height:350px;
+    border-radius:18px;
 
-border-radius:12px;
+    overflow:hidden;
 
-overflow:hidden;
+    border:2px solid #ece7e2;
+
+    background:#fafafa;
+
+}
+
+/*==============================*
+* DIVISOR
+*==============================*/
+
+.divider{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin:26px 0;
+
+    color:#999;
+
+    font-size:.9rem;
+
+}
+
+.divider::before,
+.divider::after{
+
+    content:"";
+
+    flex:1;
+
+    height:1px;
+
+    background:#ece7e2;
+
+}
+
+/*==============================*
+* BOTÓN IMAGEN
+*==============================*/
+
+.image-button{
+
+    width:100%;
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:15px 22px;
+
+    border-radius:999px;
+
+    background:var(--color-primary);
+
+    color:white;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    transition:
+        background .25s,
+        transform .25s;
+
+    box-shadow:
+        0 10px 25px rgba(217,134,154,.18);
+
+}
+
+.image-button:hover{
+
+    background:#c97288;
+
+    transform:translateY(-2px);
+
+}
+
+.image-button:disabled{
+
+    cursor:not-allowed;
+
+    opacity:.75;
+
+    transform:none;
 
 }

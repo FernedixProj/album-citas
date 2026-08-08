@@ -1,167 +1,265 @@
-@if (isEdit()) {
+<section class="form-page">
 
-<h1>Editar actividad</h1>
+    <header class="form-header">
 
-} @else {
+        <div>
 
-<h1>Nueva actividad</h1>
+            <h1>
 
-}
+                @if(isEdit()){
 
-@if (isEdit()) {
+                    Editar actividad
 
-<label>ID</label>
+                }@else{
 
-<input
-    [ngModel]="model().id"
-    readonly>
+                    Nueva actividad
 
-<br><br>
+                }
 
-}
+            </h1>
 
-<label>Actividad</label>
+            <p>
 
-<input
-    [ngModel]="model().actividad"
-    (ngModelChange)="update('actividad',$event)">
+                Configura la actividad que aparecerá en el álbum.
 
-<br><br>
+            </p>
 
-<label>Frase</label>
+        </div>
 
-<textarea
-    [ngModel]="model().frase"
-    (ngModelChange)="update('frase',$event)">
-</textarea>
+    </header>
 
-<br><br>
+    <section class="form-card">
 
-<label>Mes</label>
+        <div class="form-grid">
 
-<select
-    [ngModel]="model().mes"
-    (ngModelChange)="changeMonth($event)">
+            <!--==============================-->
+            <!-- INFORMACIÓN -->
+            <!--==============================-->
 
-<option>Enero</option>
-<option>Febrero</option>
-<option>Marzo</option>
-<option>Abril</option>
-<option>Mayo</option>
-<option>Junio</option>
-<option>Julio</option>
-<option>Agosto</option>
-<option>Septiembre</option>
-<option>Octubre</option>
-<option>Noviembre</option>
-<option>Diciembre</option>
+            <section class="form-section">
 
-</select>
+                <h2>
 
-<br><br>
+                    Información
 
-<label>Foto del mes</label>
+                </h2>
 
-<input
-    [ngModel]="model().fotoURL"
-    readonly>
+                <label>
 
-<br><br>
+                    Actividad
 
-@if (isEdit()) {
+                    <input
+                        type="text"
+                        [ngModel]="model().actividad"
+                        (ngModelChange)="update('actividad',$event)">
 
-<hr>
+                </label>
 
-<label>
+                <label>
 
-<input
-    type="checkbox"
-    [ngModel]="model().isRealizada"
-    (ngModelChange)="changeStatus($event)">
+                    Frase
 
-Actividad realizada
+                    <textarea
+                        rows="4"
+                        [ngModel]="model().frase"
+                        (ngModelChange)="update('frase',$event)">
 
-</label>
+                    </textarea>
 
-<br><br>
+                </label>
 
-<label>Fecha de realización</label>
+                <label>
 
-<input
-    type="date"
-    [ngModel]="getDateValue()"
-    (ngModelChange)="changeDate($event)">
+                    Mes
 
-<button
-    type="button"
-    (click)="clearDate()"
-    [disabled]="!model().fechaRealizacion">
+                    <select
+                        [ngModel]="model().mes"
+                        (ngModelChange)="changeMonth($event)">
 
-Limpiar fecha
+                        <option>Enero</option>
+                        <option>Febrero</option>
+                        <option>Marzo</option>
+                        <option>Abril</option>
+                        <option>Mayo</option>
+                        <option>Junio</option>
+                        <option>Julio</option>
+                        <option>Agosto</option>
+                        <option>Septiembre</option>
+                        <option>Octubre</option>
+                        <option>Noviembre</option>
+                        <option>Diciembre</option>
 
-</button>
+                    </select>
 
-<br><br>
+                </label>
 
-<label>Foto subida</label>
+                <h2>
 
-<input
-    [ngModel]="model().fotoSubidaURL"
-    (ngModelChange)="update('fotoSubidaURL',$event)">
+                    Estado de la actividad
 
-<button
-    type="button"
-    (click)="clearPhoto()"
-    [disabled]="!model().fotoSubidaURL">
+                </h2>
 
-Limpiar foto
+                <div class="status-options">
 
-</button>
+                    <label>
 
-<br><br>
+                        <input
+                            type="radio"
+                            name="status"
+                            [checked]="!model().isRealizada"
+                            (change)="changeStatus(false)">
 
-@if (!model().isRealizada) {
+                        Pendiente
 
-<p>
+                    </label>
 
-⚠️ Esta actividad está pendiente.
-Si la marcas como realizada podrás completar posteriormente la fecha y la fotografía.
+                    <label>
 
-</p>
+                        <input
+                            type="radio"
+                            name="status"
+                            [checked]="model().isRealizada"
+                            (change)="changeStatus(true)">
 
-} @else {
+                        Realizada
 
-<p>
+                    </label>
 
-✅ Actividad marcada como realizada.
+                </div>
 
-</p>
+                @if(model().isRealizada){
 
-}
+                <h2>
 
-}
+                    Recuerdo
 
-<hr>
+                </h2>
 
-<button
-    (click)="save()">
+                <label>
 
-@if (isEdit()) {
+                    Fecha de realización
 
-Actualizar actividad
+                    <input
+                        type="date"
+                        [value]="getDateValue()"
+                        (change)="changeDate($any($event.target).value)">
 
-} @else {
+                </label>
 
-Guardar actividad
+                <div class="memory-actions">
 
-}
+                    @if(model().fechaRealizacion){
 
-</button>
+                    <button
+                        class="secondary-button"
+                        type="button"
+                        (click)="clearDate()">
 
-<button
-    type="button"
-    (click)="cancel()">
+                        Eliminar fecha de realización
 
-Cancelar
+                    </button>
 
-</button>
+                    }
+
+                    @if(model().fotoSubidaURL){
+
+                    <button
+                        class="secondary-button"
+                        type="button"
+                        (click)="clearPhoto()">
+
+                        Eliminar fotografía del recuerdo
+
+                    </button>
+
+                    }
+
+                </div>
+
+                }
+
+            </section>
+
+            <!--==============================-->
+            <!-- VISTA PREVIA -->
+            <!--==============================-->
+
+            <aside class="preview-section">
+
+                <h2>
+
+                    Vista previa
+
+                </h2>
+
+                <h3 class="preview-title">
+
+                    📷 Portada del mes
+
+                </h3>
+
+                <div class="preview-image">
+
+                    <img
+                        [src]="model().fotoURL"
+                        alt="Portada">
+
+                </div>
+
+                @if(model().fotoSubidaURL){
+
+                <div class="preview-divider"></div>
+
+                <h3 class="preview-title">
+
+                    ❤️ Fotografía del recuerdo
+
+                </h3>
+
+                <div class="preview-image">
+
+                    <img
+                        [src]="model().fotoSubidaURL"
+                        alt="Recuerdo">
+
+                </div>
+
+                }
+
+            </aside>
+
+        </div>
+
+        <footer class="actions">
+
+            <button
+                class="cancel-button"
+                type="button"
+                (click)="cancel()">
+
+                Cancelar
+
+            </button>
+
+            <button
+                class="save-button"
+                type="button"
+                (click)="save()">
+
+                @if(isEdit()){
+
+                    Guardar cambios
+
+                }@else{
+
+                    Crear actividad
+
+                }
+
+            </button>
+
+        </footer>
+
+    </section>
+
+</section>

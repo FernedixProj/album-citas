@@ -110,7 +110,8 @@ export class ActivityForm implements OnInit {
     const confirmed =
       await this.confirmationService.confirm(
         'Cambiar estado',
-        'La actividad dejará de mostrarse como realizada en el álbum. La fecha y la fotografía permanecerán guardadas. ¿Deseas continuar?'
+        'La actividad dejará de mostrarse como realizada en el álbum. La fecha y la fotografía permanecerán guardadas. ¿Deseas continuar?',
+        'Aceptar'
       );
 
     if (!confirmed) {
@@ -147,31 +148,34 @@ export class ActivityForm implements OnInit {
 
     if (!value) {
 
-      this.update('fechaRealizacion', null);
+      this.update(
+        'fechaRealizacion',
+        null
+      );
 
       return;
 
     }
 
-    const [year, month, day] = value
-      .split('-')
-      .map(Number);
-
-    const date = new Date(
-      year,
-      month - 1,
-      day
-    );
+    const [year, month, day] =
+      value
+        .split('-')
+        .map(Number);
 
     this.update(
       'fechaRealizacion',
-      date
+      new Date(
+        year,
+        month - 1,
+        day
+      )
     );
 
   }
-  async save(): Promise<void> {
+    async save(): Promise<void> {
 
     const activity = structuredClone(this.model());
+
     activity.actividad = activity.actividad.trim();
     activity.frase = activity.frase.trim();
 
@@ -202,7 +206,8 @@ export class ActivityForm implements OnInit {
       const confirmed =
         await this.confirmationService.confirm(
           'Actualizar actividad',
-          '¿Deseas guardar los cambios realizados?'
+          '¿Deseas guardar los cambios realizados?',
+          'Guardar'
         );
 
       if (!confirmed) {
@@ -231,7 +236,9 @@ export class ActivityForm implements OnInit {
 
     }
 
-    this.router.navigate(['/admin']);
+    this.router.navigate([
+      '/admin'
+    ]);
 
   }
 
@@ -244,14 +251,18 @@ export class ActivityForm implements OnInit {
     const confirmed =
       await this.confirmationService.confirm(
         'Eliminar fotografía',
-        'La fotografía asociada será eliminada. ¿Deseas continuar?'
+        'La fotografía asociada será eliminada. ¿Deseas continuar?',
+        'Eliminar'
       );
 
     if (!confirmed) {
       return;
     }
 
-    this.update('fotoSubidaURL', null);
+    this.update(
+      'fotoSubidaURL',
+      null
+    );
 
   }
 
@@ -264,20 +275,26 @@ export class ActivityForm implements OnInit {
     const confirmed =
       await this.confirmationService.confirm(
         'Eliminar fecha',
-        'La fecha de realización será eliminada. ¿Deseas continuar?'
+        'La fecha de realización será eliminada. ¿Deseas continuar?',
+        'Eliminar'
       );
 
     if (!confirmed) {
       return;
     }
 
-    this.update('fechaRealizacion', null);
+    this.update(
+      'fechaRealizacion',
+      null
+    );
 
   }
 
   cancel(): void {
 
-    this.router.navigate(['/admin']);
+    this.router.navigate([
+      '/admin'
+    ]);
 
   }
 

@@ -1,41 +1,213 @@
 .backdrop{
 
-position:fixed;
+    position:fixed;
 
-inset:0;
+    inset:0;
 
-background:rgba(0,0,0,.4);
+    display:flex;
 
-display:flex;
+    justify-content:center;
 
-align-items:center;
+    align-items:center;
 
-justify-content:center;
+    padding:20px;
 
-z-index:9999;
+    background:rgba(0,0,0,.45);
+
+    backdrop-filter:blur(4px);
+
+    z-index:9999;
+
+    animation:fadeIn .2s ease;
 
 }
 
 .dialog{
 
-background:white;
+    width:min(430px,100%);
 
-padding:24px;
+    background:white;
 
-border-radius:12px;
+    border-radius:22px;
 
-min-width:320px;
+    overflow:hidden;
 
-display:flex;
+    text-align:center;
 
-flex-direction:column;
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.18);
 
-gap:20px;
+    animation:popup .25s ease;
+
+}
+
+.dialog-decoration{
+
+    height:6px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--color-primary),
+            var(--color-secondary)
+        );
+
+}
+
+.icon{
+
+    width:78px;
+
+    height:78px;
+
+    margin:30px auto 20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:#fff5f7;
+
+    border:1px solid #f3d9df;
+
+    font-size:2.3rem;
+
+}
+
+.dialog h2{
+
+    color:var(--color-primary);
+
+    margin-bottom:12px;
+
+    font-size:1.7rem;
+
+}
+
+.dialog p{
+
+    padding:0 30px;
+
+    color:#666;
+
+    line-height:1.7;
+
+}
+
+.dialog small{
+
+    display:block;
+
+    margin:22px 0;
+
+    color:#999;
+
+}
+
+footer{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:14px;
+
+    padding:26px 30px 34px;
 
 }
 
 button{
 
-cursor:pointer;
+    border:none;
+
+    cursor:pointer;
+
+    min-width:140px;
+
+    padding:13px 26px;
+
+    border-radius:999px;
+
+    font-weight:600;
+
+    font-size:1rem;
+
+    transition:
+        transform .25s,
+        background .25s;
+
+}
+
+.cancel-button{
+
+    background:#efefef;
+
+    color:#555;
+
+}
+
+.cancel-button:hover{
+
+    background:#e2e2e2;
+
+}
+
+.accept-button{
+
+    background:var(--color-primary);
+
+    color:white;
+
+}
+
+.accept-button:hover{
+
+    background:#c97288;
+
+    transform:translateY(-2px);
+
+}
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(18px)
+            scale(.95);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
 
 }

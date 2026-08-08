@@ -1,48 +1,154 @@
-@if (activity(); as act) {
+@if(activity(); as activity){
 
-<h1>{{ act.actividad }}</h1>
+<section class="detail-page">
 
-<img
-    [src]="act.fotoSubidaURL ?? act.fotoURL"
-    [alt]="act.actividad"
-    width="400">
+    <div class="floating-hearts">
 
-<p>
+        <span>❤️</span>
+        <span>🤍</span>
+        <span>💕</span>
+        <span>❤️</span>
+        <span>✨</span>
+        <span>💕</span>
+        <span>🤍</span>
+        <span>❤️</span>
 
-<strong>Mes:</strong>
+    </div>
 
-{{ act.mes }}
+    <article class="detail-card">
 
-</p>
+        <div class="detail-icon">
 
-<p>
+            @if(activity.fotoSubidaURL){
 
-<strong>Frase:</strong>
+                📸
 
-{{ act.frase }}
+            } @else {
 
-</p>
+                ❤️
 
-@if (act.fechaRealizacion) {
+            }
 
-<p>
+        </div>
 
-<strong>Fecha:</strong>
+        <h1>
 
-{{ act.fechaRealizacion.toLocaleDateString('es-EC', {
-day:'2-digit',
-month:'long',
-year:'numeric'
-}) }}
+            {{ activity.actividad }}
 
-</p>
+        </h1>
 
-}
+        <p class="phrase">
 
-<button (click)="back()">
+            "{{ activity.frase }}"
 
-Volver al álbum
+        </p>
 
-</button>
+        <div class="photo-frame">
+
+            <div class="photo-decoration top-left">
+
+                ❤️
+
+            </div>
+
+            <div class="photo-decoration top-right">
+
+                🤍
+
+            </div>
+
+            <div class="photo-decoration bottom-left">
+
+                💕
+
+            </div>
+
+            <div class="photo-decoration bottom-right">
+
+                ❤️
+
+            </div>
+
+            <div class="photo-container">
+
+                <img
+
+                    [src]="activity.fotoSubidaURL ?? activity.fotoURL"
+
+                    [alt]="activity.actividad">
+
+            </div>
+
+        </div>
+
+        @if(activity.fechaRealizacion){
+
+        <div class="detail-info">
+
+            <span class="label">
+
+                Realizado el
+
+            </span>
+
+            <span class="value">
+
+                {{ formatDate(activity.fechaRealizacion) }}
+                
+            </span>
+
+        </div>
+
+        }
+
+        @else{
+
+        <div class="pending-box">
+
+            <div class="pending-icon">
+
+                💌
+
+            </div>
+
+            <h3>
+
+                Este recuerdo aún está por escribirse
+
+            </h3>
+
+            <p>
+
+                La aventura ya fue descubierta.
+
+                Cuando llegue ese momento especial,
+                aquí aparecerán las fotografías para
+                volver a vivirlo una y otra vez.
+
+            </p>
+
+        </div>
+
+        }
+
+        <div class="hearts-divider">
+
+            ❤️ &nbsp; 🤍 &nbsp; 💕 &nbsp; ❤️
+
+        </div>
+
+        <button
+
+            class="back-button"
+
+            (click)="back()">
+
+            ← Volver al álbum
+
+        </button>
+
+    </article>
+
+</section>
 
 }

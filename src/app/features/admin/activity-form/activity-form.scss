@@ -1,0 +1,489 @@
+:host{
+
+    display:block;
+
+    min-height:100vh;
+
+    padding:40px 30px 80px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdfb,
+            #fff8f8
+        );
+
+}
+
+/*==============================*
+* HEADER
+*==============================*/
+
+.form-header{
+
+    margin-bottom:35px;
+
+}
+
+.form-header h1{
+
+    color:var(--color-primary);
+
+    font-size:2.4rem;
+
+    margin-bottom:10px;
+
+}
+
+.form-header p{
+
+    color:var(--text-light);
+
+    line-height:1.7;
+
+}
+
+/*==============================*
+* TARJETA
+*==============================*/
+
+.form-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    border:1px solid #ece7e2;
+
+    padding:35px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.05);
+
+}
+
+/*==============================*
+* GRID
+*==============================*/
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1.3fr
+        .8fr;
+
+    gap:45px;
+
+}
+
+/*==============================*
+* COLUMNA IZQUIERDA
+*==============================*/
+
+.form-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+}
+
+.form-section h2{
+
+    color:var(--color-primary);
+
+    font-size:1.3rem;
+
+    margin-top:10px;
+
+}
+
+/*==============================*
+* COLUMNA DERECHA
+*==============================*/
+
+.preview-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    position:sticky;
+
+    top:30px;
+
+    align-self:start;
+
+}
+
+.preview-section h2{
+
+    color:var(--color-primary);
+
+    font-size:1.3rem;
+
+}
+
+.preview-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin:0;
+
+    font-size:1rem;
+
+    color:#555;
+
+    font-weight:600;
+
+}
+
+/*==============================*
+* LABELS
+*==============================*/
+
+label{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    color:#555;
+
+    font-weight:600;
+
+}
+
+/*==============================*
+* INPUTS
+*==============================*/
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border-radius:12px;
+
+    border:1px solid #e6e2df;
+
+    background:white;
+
+    font-size:.95rem;
+
+    font-family:inherit;
+
+    transition:
+        border-color .25s,
+        box-shadow .25s;
+
+}
+
+textarea{
+
+    resize:vertical;
+
+    min-height:130px;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    outline:none;
+
+    border-color:var(--color-primary);
+
+    box-shadow:
+        0 0 0 4px rgba(217,134,154,.12);
+
+}
+
+/*==============================*
+* VISTA PREVIA
+*==============================*/
+
+.preview-image{
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    border:2px solid #ece7e2;
+
+    background:#f6f6f6;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.06);
+
+}
+
+.preview-image img{
+
+    width:100%;
+
+    display:block;
+
+    aspect-ratio:1/1;
+
+    object-fit:cover;
+
+    transition:transform .35s ease;
+
+}
+
+.preview-image:hover img{
+
+    transform:scale(1.03);
+
+}
+
+.preview-divider{
+
+    height:1px;
+
+    margin:10px 0;
+
+    background:#ece7e2;
+
+}
+/*==============================*
+* ESTADO
+*==============================*/
+
+.status-options{
+
+    display:flex;
+
+    gap:30px;
+
+}
+
+.status-options label{
+
+    display:flex;
+
+    flex-direction:row;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-weight:500;
+
+}
+
+/*==============================*
+* ACCIONES DEL RECUERDO
+*==============================*/
+
+.memory-actions{
+
+    display:flex;
+
+    gap:14px;
+
+    flex-wrap:wrap;
+
+    margin-top:4px;
+
+}
+
+.secondary-button{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:12px 20px;
+
+    border-radius:999px;
+
+    background:#fff2f2;
+
+    color:#c44;
+
+    font-weight:500;
+
+    transition:
+        background .25s,
+        transform .25s;
+
+}
+
+.secondary-button:hover{
+
+    background:#ffe4e4;
+
+    transform:translateY(-2px);
+
+}
+
+/*==============================*
+* BOTONES
+*==============================*/
+
+.actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:16px;
+
+    margin-top:45px;
+
+    padding-top:28px;
+
+    border-top:1px solid #ece7e2;
+
+}
+
+.cancel-button{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:14px 28px;
+
+    border-radius:999px;
+
+    background:#ececec;
+
+    color:#555;
+
+    font-weight:600;
+
+    transition:
+        background .25s,
+        transform .25s;
+
+}
+
+.cancel-button:hover{
+
+    background:#dfdfdf;
+
+    transform:translateY(-2px);
+
+}
+
+.save-button{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:14px 34px;
+
+    border-radius:999px;
+
+    background:var(--color-primary);
+
+    color:white;
+
+    font-weight:600;
+
+    transition:
+        background .25s,
+        transform .25s;
+
+    box-shadow:
+        0 10px 24px rgba(217,134,154,.18);
+
+}
+
+.save-button:hover{
+
+    background:#c97288;
+
+    transform:translateY(-2px);
+
+}
+
+/*==============================*
+* RESPONSIVE
+*==============================*/
+
+@media (max-width:900px){
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .preview-section{
+
+        position:static;
+
+    }
+
+}
+
+@media (max-width:650px){
+
+    :host{
+
+        padding:20px 15px 60px;
+
+    }
+
+    .form-card{
+
+        padding:22px;
+
+    }
+
+    .memory-actions{
+
+        flex-direction:column;
+
+    }
+
+    .memory-actions button{
+
+        width:100%;
+
+    }
+
+    .status-options{
+
+        flex-direction:column;
+
+        gap:14px;
+
+    }
+
+    .actions{
+
+        flex-direction:column-reverse;
+
+    }
+
+    .actions button{
+
+        width:100%;
+
+    }
+
+}

@@ -1,30 +1,60 @@
 @if (confirmation.visible()) {
 
-<div class="backdrop">
+<div
+    class="backdrop"
+    (click)="confirmation.cancel()">
 
-    <div class="dialog">
+    <section
+        class="dialog"
+        (click)="$event.stopPropagation()">
 
-        <h2>{{ confirmation.title() }}</h2>
+        <div class="dialog-decoration"></div>
 
-        <p>{{ confirmation.message() }}</p>
+        <div class="icon">
 
-        <div>
+            ⚠️
 
-            <button (click)="confirmation.cancel()">
+        </div>
+
+        <h2>
+
+            {{ confirmation.title() }}
+
+        </h2>
+
+        <p>
+
+            {{ confirmation.message() }}
+
+        </p>
+
+        <small>
+
+            Esta acción no se puede deshacer.
+
+        </small>
+
+        <footer>
+
+            <button
+                class="cancel-button"
+                (click)="confirmation.cancel()">
 
                 Cancelar
 
             </button>
 
-            <button (click)="confirmation.accept()">
+            <button
+                class="accept-button"
+                (click)="confirmation.accept()">
 
-                Aceptar
+                {{ confirmation.acceptText() }}
 
             </button>
 
-        </div>
+        </footer>
 
-    </div>
+    </section>
 
 </div>
 

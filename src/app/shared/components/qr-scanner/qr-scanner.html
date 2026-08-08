@@ -2,7 +2,7 @@
 
 <p>
 
-Se necesita permiso para acceder a la cámara.
+    Se necesita permiso para acceder a la cámara.
 
 </p>
 
@@ -18,7 +18,7 @@ Se necesita permiso para acceder a la cámara.
 
         <option>
 
-            {{camera.label || 'Cámara'}}
+            {{ camera.label || 'Cámara' }}
 
         </option>
 
@@ -29,7 +29,6 @@ Se necesita permiso para acceder a la cámara.
 <br><br>
 
 }
-
 
 <zxing-scanner
 
@@ -42,3 +41,38 @@ Se necesita permiso para acceder a la cámara.
     (scanSuccess)="onScanSuccess($event)">
 
 </zxing-scanner>
+
+<div class="divider">
+
+    <span>
+
+        o
+
+    </span>
+
+</div>
+
+<button
+    class="image-button"
+    type="button"
+    (click)="selectImage()"
+    [disabled]="loadingImage">
+
+    @if(!loadingImage){
+
+        🖼️ Elegir una imagen
+
+    }@else{
+
+        ⏳ Analizando imagen...
+
+    }
+
+</button>
+
+<input
+    #imageInput
+    type="file"
+    accept="image/*"
+    hidden
+    (change)="onImageSelected($event)">

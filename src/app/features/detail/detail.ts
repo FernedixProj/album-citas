@@ -6,7 +6,9 @@ import { Activity } from '../../models/activity.model';
 
 @Component({
   selector: 'app-detail',
-  imports: [],
+  imports: [
+    
+  ],
   templateUrl: './detail.html',
   styleUrl: './detail.scss'
 })
@@ -57,5 +59,21 @@ export class Detail implements OnInit {
     this.router.navigate(['/album']);
 
   }
+  formatDate(date: any): string {
+
+  if (!date) {
+    return '';
+  }
+
+  const value = date.toDate ? date.toDate() : new Date(date);
+
+  return value.toLocaleDateString('es-CO', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+
+}
 
 }

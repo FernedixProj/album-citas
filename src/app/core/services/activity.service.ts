@@ -60,16 +60,34 @@ export class ActivityService {
 
   }
 
-  private async generateId(month: string): Promise<string> {
+ private async generateId(month: string): Promise<string> {
 
-    const activities = await this.repository.findAll();
+  const activities = await this.repository.findAll();
 
-    const prefix = month.substring(0,3).toLowerCase();
+  const prefix = month.substring(0, 3).toLowerCase();
 
-    const total = activities.filter(a => a.mes === month).length + 1;
+  const numbers = activities
+    .filter(activity => activity.mes === month)
+    .map(activity => {
 
-    return `${prefix}${total.toString().padStart(2,'0')}`;
+      const number = Number(
+        activity.id.replace(prefix, '')
+      );
 
-  }
+      return isNaN(number)
+        ? 0
+        : number;
+
+    });
+
+  const nextNumber = numbers.length === 0
+    ? 1
+    : Math.max(...numbers) + 1;
+
+  return `${prefix}${nextNumber
+    .toString()
+    .padStart(2, '0')}`;
+
+}
 
 }
