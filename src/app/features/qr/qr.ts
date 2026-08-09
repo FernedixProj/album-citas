@@ -2,6 +2,8 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ActivityService } from '../../core/services/activity.service';
+import { AuthService } from '../../core/services/auth.service';
+
 import { Activity } from '../../models/activity.model';
 
 type QrState =
@@ -9,6 +11,7 @@ type QrState =
   | 'new'
   | 'pending'
   | 'memory'
+  | 'locked'
   | 'invalid';
 
 @Component({
@@ -20,7 +23,9 @@ export class Qr implements OnInit {
 
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+
   private readonly activityService = inject(ActivityService);
+  private readonly authService = inject(AuthService);
 
   readonly state = signal<QrState>('loading');
 
@@ -40,7 +45,8 @@ export class Qr implements OnInit {
 
     }
 
-    const activity = await this.activityService.findById(id);
+    const activity =
+      await this.activityService.findById(id);
 
     if (!activity) {
 
@@ -55,13 +61,23 @@ export class Qr implements OnInit {
     // Primera vez
     if (!activity.isRealizada) {
 
-      activity.isRealizada = true;
+      // Solo admin y editor pueden completar automáticamente
+      if (this.authService.canComplete()) {
 
-      await this.activityService.update(activity);
+        activity.isRealizada = true;
 
-      this.state.set('new');
+        await this.activityService.update(activity);
 
-      this.startProgress(10);
+        this.state.set('new');
+
+        this.startProgress(10);
+
+      } else {
+
+        // Invitado: no puede desbloquear la actividad
+        this.state.set('locked');
+
+      }
 
       return;
 
@@ -95,7 +111,9 @@ export class Qr implements OnInit {
 
       current++;
 
-      this.progress.set(current / total * 100);
+      this.progress.set(
+        current / total * 100
+      );
 
       if (current >= total) {
 
@@ -105,7 +123,7 @@ export class Qr implements OnInit {
 
       }
 
-    },100);
+    }, 100);
 
   }
 

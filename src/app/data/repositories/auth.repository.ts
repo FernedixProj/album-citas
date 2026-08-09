@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
+
 import {
   doc,
-  getDoc
+  getDoc,
+  serverTimestamp,
+  setDoc
 } from 'firebase/firestore';
 
 import { db } from '../../core/firebase/firebase';
@@ -12,7 +15,9 @@ import { AuthorizedUser } from '../../models/authorized-user.model';
 })
 export class AuthRepository {
 
-  async getAuthorizedUser(uid: string): Promise<AuthorizedUser | null> {
+  async getAuthorizedUser(
+    uid: string
+  ): Promise<AuthorizedUser | null> {
 
     const document = await getDoc(
       doc(db, 'authorizedUsers', uid)
@@ -23,6 +28,30 @@ export class AuthRepository {
     }
 
     return document.data() as AuthorizedUser;
+
+  }
+
+  async createGuest(
+    uid: string,
+    email: string
+  ): Promise<AuthorizedUser> {
+
+    const user: AuthorizedUser = {
+      uid,
+      email,
+      active: true,
+      role: 'guest'
+    };
+
+    await setDoc(
+      doc(db, 'authorizedUsers', uid),
+      {
+        ...user,
+        createdAt: serverTimestamp()
+      }
+    );
+
+    return user;
 
   }
 

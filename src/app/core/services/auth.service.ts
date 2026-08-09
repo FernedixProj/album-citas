@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 
 import {
   GoogleAuthProvider,
@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth';
 
 import { auth } from '../firebase/firebase';
+
 import { AuthRepository } from '../../data/repositories/auth.repository';
 import { AuthorizedUser } from '../../models/authorized-user.model';
 
@@ -18,58 +19,150 @@ import { AuthorizedUser } from '../../models/authorized-user.model';
 export class AuthService {
 
   private readonly repository = inject(AuthRepository);
+
   private readonly provider = new GoogleAuthProvider();
 
-  async login(): Promise<User | null> {
+  readonly authorizedUser =
+    signal<AuthorizedUser | null>(null);
 
-    const credential = await signInWithPopup(
-      auth,
-      this.provider
-    );
+  private ready = false;
 
-    return credential.user;
+  private readyPromise: Promise<void>;
 
-  }
+  private resolveReady!: () => void;
 
-  currentUser(): Promise<User | null> {
+  constructor() {
 
-    return new Promise(resolve => {
+    this.provider.setCustomParameters({
+      prompt: 'select_account'
+    });
 
-      const unsubscribe = onAuthStateChanged(auth, user => {
+    this.readyPromise = new Promise(resolve => {
+      this.resolveReady = resolve;
+    });
 
-        unsubscribe();
+    onAuthStateChanged(auth, async user => {
 
-        resolve(user);
+      if (!user) {
 
-      });
+        this.authorizedUser.set(null);
+
+      } else {
+
+        let authorizedUser =
+          await this.repository.getAuthorizedUser(
+            user.uid
+          );
+
+        if (!authorizedUser) {
+
+          authorizedUser =
+            await this.repository.createGuest(
+              user.uid,
+              user.email ?? ''
+            );
+
+        }
+
+        this.authorizedUser.set(
+          authorizedUser
+        );
+
+      }
+
+      if (!this.ready) {
+
+        this.ready = true;
+
+        this.resolveReady();
+
+      }
 
     });
 
   }
 
-  async getAuthorizedUser(): Promise<AuthorizedUser | null> {
+  async waitUntilReady(): Promise<void> {
 
-    const user = await this.currentUser();
-
-    if (!user) {
-      return null;
+    if (this.ready) {
+      return;
     }
 
-    return this.repository.getAuthorizedUser(user.uid);
+    await this.readyPromise;
 
   }
 
-  async isAuthorized(): Promise<boolean> {
+  async login(): Promise<User | null> {
 
-    const authorizedUser = await this.getAuthorizedUser();
+    const credential =
+      await signInWithPopup(
+        auth,
+        this.provider
+      );
 
-    return authorizedUser?.active === true;
+    return credential.user;
 
   }
 
-  logout(): Promise<void> {
+  currentUser(): User | null {
 
-    return signOut(auth);
+    return auth.currentUser;
+
+  }
+
+  getAuthorizedUser(): AuthorizedUser | null {
+
+    return this.authorizedUser();
+
+  }
+
+  isAuthorized(): boolean {
+
+    return this.authorizedUser()?.active === true;
+
+  }
+
+  isAdmin(): boolean {
+
+    return this.authorizedUser()?.role === 'admin';
+
+  }
+
+  isEditor(): boolean {
+
+    return this.authorizedUser()?.role === 'editor';
+
+  }
+
+  isGuest(): boolean {
+
+    return this.authorizedUser()?.role === 'guest';
+
+  }
+
+  canComplete(): boolean {
+
+    return this.isAdmin() || this.isEditor();
+
+  }
+
+  canAccessDashboard(): boolean {
+
+    return this.isAdmin();
+
+  }
+
+  async logout(): Promise<void> {
+
+    this.authorizedUser.set(null);
+
+    this.ready = false;
+
+    this.readyPromise = new Promise(resolve => {
+      this.resolveReady = resolve;
+    });
+
+    await signOut(auth);
 
   }
 

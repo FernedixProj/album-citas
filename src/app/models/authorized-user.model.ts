@@ -6,6 +6,6 @@ export interface AuthorizedUser {
 
   active: boolean;
 
-  role: 'admin' | 'viewer';
+  role: 'admin' | 'editor' | 'guest';
 
 }

@@ -23,7 +23,7 @@ export class Album implements OnInit {
   private readonly activityService = inject(ActivityService);
   private readonly router = inject(Router);
   private readonly notificationService = inject(NotificationService);
-  private readonly authService = inject(AuthService);
+  readonly authService = inject(AuthService);
 
   readonly months = signal<Month[]>([]);
 
@@ -33,11 +33,17 @@ export class Album implements OnInit {
 
   readonly showMenu = signal(false);
 
+  readonly canAccessDashboard = signal(false);
+
   async ngOnInit(): Promise<void> {
 
     const data = await this.activityService.findAll();
 
     this.months.set(data);
+
+    this.canAccessDashboard.set(
+      this.authService.canAccessDashboard()
+    );
 
   }
 
@@ -111,6 +117,15 @@ export class Album implements OnInit {
     this.showMenu.set(false);
 
   }
+  goToDashboard(): void {
+
+  this.closeMenu();
+
+  this.router.navigate([
+    '/admin'
+  ]);
+
+}
 
   async logout(): Promise<void> {
 

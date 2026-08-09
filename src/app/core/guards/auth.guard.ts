@@ -8,14 +8,15 @@ export const authGuard: CanActivateFn = async () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  const authorized = await authService.isAuthorized();
+  // Esperar a que Firebase restaure la sesión
+  await authService.waitUntilReady();
 
-  if (authorized) {
+  if (authService.isAuthorized()) {
+
     return true;
+
   }
 
-  router.navigate(['/login']);
-
-  return false;
+  return router.parseUrl('/login');
 
 };

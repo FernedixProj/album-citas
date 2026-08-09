@@ -19,11 +19,7 @@
 
     <div class="header-actions">
 
-        <button
-
-            class="scan-button"
-
-            (click)="openScanner()">
+        <button class="scan-button" (click)="openScanner()">
 
             <span class="icon">
 
@@ -41,11 +37,7 @@
 
         <div class="menu-container">
 
-            <button
-
-                class="menu-button"
-
-                (click)="toggleMenu()">
+            <button class="menu-button" (click)="toggleMenu()">
 
                 ⚙️
 
@@ -55,11 +47,23 @@
 
             <div class="menu">
 
-                <button
+                @if(canAccessDashboard()){
 
-                    class="menu-item"
+                <button class="menu-item" (click)="goToDashboard()">
 
-                    (click)="logout()">
+                    ⚙️
+
+                    <span>
+
+                        Dashboard
+
+                    </span>
+
+                </button>
+
+                }
+
+                <button class="menu-item" (click)="logout()">
 
                     🚪
 
@@ -72,7 +76,6 @@
                 </button>
 
             </div>
-
             }
 
         </div>
@@ -103,25 +106,14 @@
 
         @for(activity of month.activities; track activity.id){
 
-        <article
-
-            class="photo"
-
-            [class.locked]="!activity.isRealizada"
-
-            [class.completed]="activity.isRealizada"
-
+        <article class="photo" [class.locked]="!activity.isRealizada" [class.completed]="activity.isRealizada"
             (click)="openActivity(activity)">
 
             <div class="photo-image">
 
-                <img
-
-                    [src]="activity.isRealizada && activity.fotoSubidaURL
+                <img [src]="activity.isRealizada && activity.fotoSubidaURL
                         ? activity.fotoSubidaURL
-                        : activity.fotoURL"
-
-                    [alt]="activity.actividad">
+                        : activity.fotoURL" [alt]="activity.actividad">
 
                 @if(!activity.isRealizada){
 
@@ -157,17 +149,9 @@
 
 @if(showScanner()){
 
-<div
+<div class="scanner-backdrop" (click)="closeScanner()">
 
-    class="scanner-backdrop"
-
-    (click)="closeScanner()">
-
-    <section
-
-        class="scanner-dialog"
-
-        (click)="$event.stopPropagation()">
+    <section class="scanner-dialog" (click)="$event.stopPropagation()">
 
         <div class="dialog-decoration"></div>
 
@@ -195,9 +179,7 @@
 
         <div class="scanner-content">
 
-            <app-qr-scanner
-
-                (scanned)="onQrScanned($event)">
+            <app-qr-scanner (scanned)="onQrScanned($event)">
 
             </app-qr-scanner>
 
@@ -205,11 +187,7 @@
 
         <footer>
 
-            <button
-
-                class="close-button"
-
-                (click)="closeScanner()">
+            <button class="close-button" (click)="closeScanner()">
 
                 Cancelar
 

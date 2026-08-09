@@ -10,26 +10,25 @@ export const adminGuard: CanActivateFn = async () => {
   const router = inject(Router);
   const notificationService = inject(NotificationService);
 
-  const user = await authService.getAuthorizedUser();
+  // Esperar a que Firebase restaure la sesión
+  await authService.waitUntilReady();
 
-  if (!user) {
+  // No hay sesión o el usuario está deshabilitado
+  if (!authService.isAuthorized()) {
 
-    router.navigate(['/login']);
-
-    return false;
+    return router.parseUrl('/login');
 
   }
 
-  if (user.role !== 'admin') {
+  // Tiene sesión pero no es administrador
+  if (!authService.isAdmin()) {
 
     notificationService.show(
       'No tienes permisos para acceder a esta sección.',
-      'error'
+      'warning'
     );
 
-    router.navigate(['/album']);
-
-    return false;
+    return router.parseUrl('/album');
 
   }
 
