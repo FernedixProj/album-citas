@@ -3,11 +3,13 @@ import {
   ElementRef,
   EventEmitter,
   Output,
-  ViewChild
+  ViewChild,
+  inject
 } from '@angular/core';
 
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { BrowserQRCodeReader } from '@zxing/browser';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-qr-scanner',
@@ -36,6 +38,8 @@ export class QrScanner {
 
   private readonly imageReader =
     new BrowserQRCodeReader();
+    
+  private readonly notificationService = inject(NotificationService);
 
   onCamerasFound(
     devices: MediaDeviceInfo[]
@@ -117,8 +121,9 @@ export class QrScanner {
 
     } catch {
 
-      alert(
-        'No se encontró un código QR en la imagen.'
+      this.notificationService.show(
+        'No se encontró un código QR en la imagen.',
+        'warning'
       );
 
     } finally {

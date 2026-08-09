@@ -5,7 +5,6 @@ import { ActivityService } from '../../../core/services/activity.service';
 import { ConfirmationService } from '../../../core/services/confirmation.service';
 
 import { Month } from '../../../models/month.model';
-import { Activity } from '../../../models/activity.model';
 
 @Component({
   selector: 'app-dashboard',
